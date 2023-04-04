@@ -22,7 +22,6 @@ export class AdminService {
     if (!admin) {
       throw new BadRequestException('Invalid credentials');
     }
-    console.log(admin);
     const isPasswordValid = await this.isPasswordValid(
       password,
       admin.password,
