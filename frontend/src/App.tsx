@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = React.lazy(() => import("./pages/login/Login"));
+const Client = React.lazy(
+  () => import("./pages/clientFromList/ClientFromList")
+);
 
 function App() {
   return (
@@ -12,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/client" element={<Client />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
