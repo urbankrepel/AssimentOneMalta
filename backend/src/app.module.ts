@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientModule } from './client/client.module';
 import { AdminModule } from './admin/admin.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -17,6 +18,11 @@ import { AdminModule } from './admin/admin.module';
     }),
     ClientModule,
     AdminModule,
+    JwtModule.register({
+      global: true,
+      secret: 'secret',
+      signOptions: { expiresIn: '1h' },
+    }), 
   ],
   controllers: [],
   providers: [],
