@@ -6,8 +6,9 @@ const fetchAllClientForms = async () => {
       withCredentials: true,
     });
     return response;
-  } catch (e) {
-    return e;
+  } catch (e: any) {
+    console.log(e);
+    return e.response;
   }
 };
 

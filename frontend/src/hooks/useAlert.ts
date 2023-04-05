@@ -20,7 +20,11 @@ const useAlert = () => {
     return response;
   };
 
-  return { show };
+  const showError = (message:string) => {
+    toast.error(message);
+  }
+
+  return { show,showError };
 };
 
 export default useAlert;

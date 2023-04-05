@@ -4,9 +4,11 @@ import ClientFormItem from "../../../components/clientFormList/ClientFormItem";
 import TableHeading from "../../../components/clientFormList/TableHeading";
 import { fetchAllClientForms } from "../../../api/admin";
 import useAlert from "../../../hooks/useAlert";
+import { useNavigate } from "react-router-dom";
 
 const ClientFromList = () => {
-  const { show } = useAlert();
+  const { showError } = useAlert();
+  const navigate = useNavigate();
 
   const [data, setData] = React.useState<any>([]);
 
@@ -16,8 +18,9 @@ const ClientFromList = () => {
     if (response.status === 200) {
       console.log(response.data);
       setData(response.data);
-    } else {
-      // show("error", response.message);
+    } else if (response.status === 403) {
+      navigate("/login");
+      showError("You are not authorized to view this page!");
     }
   };
 
