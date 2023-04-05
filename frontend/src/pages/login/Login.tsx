@@ -3,16 +3,25 @@ import "./Login.css";
 import fetchLogin from "../../api/login";
 import useAlert from "../../hooks/useAlert";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { show } = useAlert();
+  const navigation = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const loginPromise = fetchLogin(email, password);
-    await show(loginPromise, "Logging in...", "Logged in successfully!");
+    const response: any = await show(
+      loginPromise,
+      "Logging in...",
+      "Logged in successfully!"
+    );
+    if (response.status === 200) {
+      navigation("/client-form-list");
+    }
   };
 
   return (

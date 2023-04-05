@@ -12,10 +12,12 @@ const ClientFromList = () => {
 
   const handleLoad = async () => {
     if (data.length > 0) return;
-    const response = await fetchAllClientForms();
+    const response: any = await fetchAllClientForms();
     if (response.status === 200) {
       console.log(response.data);
       setData(response.data);
+    } else {
+      // show("error", response.message);
     }
   };
 

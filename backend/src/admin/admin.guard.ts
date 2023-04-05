@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
     if (!token) return false;
     try {
       const decoded = await this.jwtService.verifyAsync(token);
-      if (decoded.id) {
+      if (decoded.body.id) {
         return true;
       }
     } catch (e) {

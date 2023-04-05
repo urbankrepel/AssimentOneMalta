@@ -7,7 +7,7 @@ const fetchAllClientForms = async () => {
     });
     return response;
   } catch (e) {
-    throw e;
+    return e;
   }
 };
 

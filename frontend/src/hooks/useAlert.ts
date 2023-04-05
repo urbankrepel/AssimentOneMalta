@@ -19,8 +19,8 @@ const useAlert = () => {
 
     return response;
   };
-  
-    return { show };
+
+  return { show };
 };
 
 export default useAlert;
