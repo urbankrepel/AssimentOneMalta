@@ -1,14 +1,34 @@
 import React from "react";
 
+interface Props {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  city: string;
+  country: string;
+}
 
-
-const ClientFormItem = () => {
+const ClientFormItem = ({
+  id,
+  first_name,
+  last_name,
+  email,
+  phone_number,
+  address,
+  city,
+  country,
+}: Props) => {
   return (
     <tr>
-      <td className="pl-4">1</td>
+      <td className="pl-4">{id ?? "1"}</td>
       <td>
-        <h5 className="font-medium mb-0">Daniel Kristeen</h5>
-        <span className="text-muted">Texas, Unitedd states</span>
+        <h5 className="font-medium mb-0">{first_name + " " + last_name}</h5>
+        <span className="text-muted">
+          {city}, {country}
+        </span>
       </td>
       <td>
         <span className="text-muted">Visual Designer</span>
@@ -16,9 +36,9 @@ const ClientFormItem = () => {
         <span className="text-muted">Past : teacher</span>
       </td>
       <td>
-        <span className="text-muted">daniel@website.com</span>
+        <span className="text-muted">{email}</span>
         <br />
-        <span className="text-muted">999 - 444 - 555</span>
+        <span className="text-muted">{phone_number}</span>
       </td>
       <td>
         <span className="text-muted">15 Mar 1988</span>
@@ -35,32 +55,6 @@ const ClientFormItem = () => {
           <option>User</option>
           <option>Subscriber</option>
         </select>
-      </td>
-      <td>
-        <button
-          type="button"
-          className="btn btn-outline-info btn-circle btn-lg btn-circle"
-        >
-          <i className="fa fa-key"></i>{" "}
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-        >
-          <i className="fa fa-trash"></i>{" "}
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-        >
-          <i className="fa fa-edit"></i>{" "}
-        </button>
-        <button
-          type="button"
-          className="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"
-        >
-          <i className="fa fa-upload"></i>{" "}
-        </button>
       </td>
     </tr>
   );

@@ -2,8 +2,26 @@ import React from "react";
 import "./ClientFormList.css";
 import ClientFormItem from "../../../components/clientFormList/ClientFormItem";
 import TableHeading from "../../../components/clientFormList/TableHeading";
+import { fetchAllClientForms } from "../../../api/admin";
+import useAlert from "../../../hooks/useAlert";
 
 const ClientFromList = () => {
+  const { show } = useAlert();
+
+  const [data, setData] = React.useState<any>([]);
+
+  const handleLoad = async () => {
+    if (data.length > 0) return;
+    const response = await fetchAllClientForms();
+    if (response.status === 200) {
+      console.log(response.data);
+      setData(response.data);
+    }
+  };
+
+  React.useEffect(() => {
+    handleLoad();
+  }, []);
   return (
     <div className="clientPage">
       <div className="row">
@@ -18,7 +36,15 @@ const ClientFromList = () => {
                   <TableHeading />
                 </thead>
                 <tbody>
-                  <ClientFormItem />
+                  {data && data.length > 0 ? (
+                    data.map((item: any) => (
+                      <ClientFormItem key={item.id} {...item} />
+                    ))
+                  ) : (
+                    <tr>
+                      <td>Loading...</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

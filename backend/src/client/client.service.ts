@@ -21,4 +21,8 @@ export class ClientService {
     });
     return client;
   }
+
+  async getAll() {
+    return await this.clientRepository.find();
+  }
 }

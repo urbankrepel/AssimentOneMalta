@@ -21,9 +21,6 @@ const TableHeading = () => {
       <th scope="col" className="border-0 text-uppercase font-medium">
         Category
       </th>
-      <th scope="col" className="border-0 text-uppercase font-medium">
-        Manage
-      </th>
     </tr>
   );
 };
