@@ -5,8 +5,14 @@ interface Props {
   handleNext: () => void;
   handleBack: () => void;
   displayBack: boolean;
+  nextDisplayName: string;
 }
-const Buttons = ({ handleNext, handleBack, displayBack }: Props) => {
+const Buttons = ({
+  handleNext,
+  handleBack,
+  displayBack,
+  nextDisplayName,
+}: Props) => {
   return (
     <div className="clientForm-buttons">
       <button
@@ -20,7 +26,7 @@ const Buttons = ({ handleNext, handleBack, displayBack }: Props) => {
         className="clientForm-button clientForm-button-next"
         onClick={handleNext}
       >
-        Next
+        {nextDisplayName}
       </button>
     </div>
   );

@@ -16,3 +16,7 @@
   padding: 10px;
   color: black;
 }
+
+.clientForm-step input:disabled {
+  visibility: hidden;
+}
