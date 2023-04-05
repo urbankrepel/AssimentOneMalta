@@ -56,6 +56,7 @@ const ClientForm = () => {
   const [maxInputs, setMaxInputs] = React.useState(0);
   const [displayOverview, setDisplayOverview] = React.useState(false);
   const [stepErrors, setStepErrors] = React.useState<StepError[]>([]);
+  const [informationSaved, setInformationSaved] = React.useState(false);
 
   const handleChange = (input: any) => (e: any) => {
     setData({ ...data, [input]: e.target.value });
@@ -223,7 +224,15 @@ const ClientForm = () => {
   };
 
   const showOverview = () => {
-    if (validateStep()) setDisplayOverview(true);
+    if (validateStep()) {
+      setDisplayOverview(true);
+      setInformationSaved(true);
+    }
+  };
+
+  const editStep = (step: number) => {
+    setStep(step);
+    setDisplayOverview(false);
   };
 
   useEffect(() => {
@@ -254,13 +263,23 @@ const ClientForm = () => {
         )}
         {!displayOverview && (
           <Buttons
-            handleNext={step < steps.length ? nextStep : showOverview}
+            handleNext={
+              step < steps.length && !informationSaved ? nextStep : showOverview
+            }
             handleBack={prevStep}
             displayBack={step > 1}
-            nextDisplayName={step < steps.length ? "Next" : "Submit"}
+            nextDisplayName={
+              informationSaved
+                ? "Save"
+                : step < steps.length
+                ? "Next"
+                : "Submit"
+            }
           />
         )}
-        {displayOverview && <AllInfromations data={data} steps={steps} />}
+        {displayOverview && (
+          <AllInfromations data={data} steps={steps} editStep={editStep} />
+        )}
       </div>
     </div>
   );

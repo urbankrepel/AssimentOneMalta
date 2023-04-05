@@ -21,4 +21,9 @@
 
 .clientForm-allInfromations-step-title > svg {
   cursor: pointer;
+  transition: scale 0.2s;
+}
+
+.clientForm-allInfromations-step-title > svg:hover {
+  scale: 1.2;
 }
