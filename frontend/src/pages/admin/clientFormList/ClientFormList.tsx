@@ -1,7 +1,7 @@
 import React from "react";
 import "./ClientFormList.css";
-import ClientFormItem from "../../components/clientFormList/ClientFormItem";
-import TableHeading from "../../components/clientFormList/TableHeading";
+import ClientFormItem from "../../../components/clientFormList/ClientFormItem";
+import TableHeading from "../../../components/clientFormList/TableHeading";
 
 const ClientFromList = () => {
   return (
