@@ -8,10 +8,13 @@
 .formStep {
   width: 100px;
   height: 15px;
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6; */
   border-radius: 15px;
+  background: linear-gradient(to left, #e6e6e6 50%, #5341d3 50%) right;
+  background-size: 200%;
+  transition: 0.3s ease-out;
 }
 
 .formStep.formStepActive {
-  background-color: #5341d3;
+  background-position: left;
 }

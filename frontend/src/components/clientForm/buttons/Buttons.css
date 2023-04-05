@@ -15,14 +15,14 @@
 }
 
 .clientForm-button-next {
-  background-color: #6a11cb;
+  background-color: #5341d3;
   color: white;
 }
 
 .clientForm-button-back {
   background-color: white;
-  color: #6a11cb;
-  border: 1px solid #6a11cb;
+  color: #5341d3;
+  border: 1px solid #5341d3;
 }
 
 .clientForm-button-back:disabled {

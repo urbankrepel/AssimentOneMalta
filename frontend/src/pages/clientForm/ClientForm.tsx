@@ -33,6 +33,7 @@ const ClientForm = () => {
 
   const [step, setStep] = React.useState(1);
   const [maxInputs, setMaxInputs] = React.useState(0);
+  const [displayOverview, setDisplayOverview] = React.useState(false);
 
   const handleChange = (input: any) => (e: any) => {
     setData({ ...data, [input]: e.target.value });
