@@ -1,6 +1,9 @@
 import React from "react";
 import "./AllInformations.css";
 import { Step } from "../../../pages/clientForm/ClientForm";
+import fetchClientForm from "../../../api/clientForm";
+import useAlert from "../../../hooks/useAlert";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   data: any;
@@ -8,7 +11,23 @@ interface Props {
   editStep: (step: number) => void;
 }
 
-const AllInfromations = ({ data, steps,editStep }: Props) => {
+const AllInfromations = ({ data, steps, editStep }: Props) => {
+  const { show } = useAlert();
+  const navigation = useNavigate();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const promiseCreate = fetchClientForm(data);
+    const response:any = await show(
+      promiseCreate,
+      "Submitting...",
+      "Submitted successfully!"
+    );
+    if(response.status === 201) {
+      navigation("/client-form-list");
+    }
+  };
+
   return (
     <div className="clientForm-allInfromations">
       {steps.map((step, index) => (
@@ -34,6 +53,9 @@ const AllInfromations = ({ data, steps,editStep }: Props) => {
           ))}
         </div>
       ))}
+      <button className="clientFormButton" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 };

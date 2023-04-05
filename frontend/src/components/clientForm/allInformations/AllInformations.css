@@ -27,3 +27,8 @@
 .clientForm-allInfromations-step-title > svg:hover {
   scale: 1.2;
 }
+
+.clientFormButton {
+  background-color: #5341d3;
+  color: white;
+}

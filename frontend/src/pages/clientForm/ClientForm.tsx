@@ -273,7 +273,7 @@ const ClientForm = () => {
                 ? "Save"
                 : step < steps.length
                 ? "Next"
-                : "Submit"
+                : "Check your information"
             }
           />
         )}
