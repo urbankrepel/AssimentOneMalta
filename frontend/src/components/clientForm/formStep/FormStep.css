@@ -9,6 +9,12 @@
   gap: 20px;
 }
 
+.clientForm-step-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .clientForm-step input {
   width: 100%;
   background-color: white;
@@ -19,4 +25,9 @@
 
 .clientForm-step input:disabled {
   visibility: hidden;
+}
+
+.clientForm-step-error {
+  color: red;
+  font-size: 12px;
 }

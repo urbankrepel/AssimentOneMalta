@@ -1,0 +1,24 @@
+.clientForm-allInfromations {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientForm-allInfromations-step {
+  border-top: 1px solid #e6e6e6;
+}
+
+.clientForm-allInfromations-step-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clientForm-allInfromations-step-title > p {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.clientForm-allInfromations-step-title > svg {
+  cursor: pointer;
+}

@@ -14,8 +14,8 @@
     rgba(106, 17, 203, 1),
     rgba(37, 117, 252, 1)
   );
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   padding-top: 20px;
 }
 
