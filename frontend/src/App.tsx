@@ -5,8 +5,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = React.lazy(() => import("./pages/login/Login"));
-const Client = React.lazy(
-  () => import("./pages/clientFromList/ClientFromList")
+const ClientFormList = React.lazy(
+  () => import("./pages/clientFormList/ClientFormList")
 );
 
 function App() {
@@ -15,18 +15,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/client" element={<Client />} />
+          <Route path="/client-form-list" element={<ClientFormList />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
-        draggable
         pauseOnHover
         theme="light"
       />

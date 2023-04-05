@@ -1,5 +1,6 @@
 .clientPage {
-  width: 100vw;
+  width: 100vw !important;
+  height: 100vh;
 }
 
 .card {
