@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { AdminEntity } from './entities/admin.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { TemplateEntity } from './entities/template.entity';
+import * as fs from 'fs';
 
 @Injectable()
 export class AdminService {
@@ -11,6 +13,8 @@ export class AdminService {
     @InjectRepository(AdminEntity)
     private readonly adminRepository: Repository<AdminEntity>,
     private readonly jwtService: JwtService,
+    @InjectRepository(TemplateEntity)
+    private readonly templateRepository: Repository<TemplateEntity>,
   ) {}
 
   async login(email: string, password: string) {
@@ -49,5 +53,46 @@ export class AdminService {
     hashedPassword: string,
   ): Promise<boolean> {
     return await bcrypt.compare(password, hashedPassword);
+  }
+
+  async addTemplate(file: Express.Multer.File) {
+    return await this.templateRepository.save({
+      name: file.originalname,
+      path: file.path,
+    });
+  }
+
+  async getTemplate(id: number) {
+    const template = await this.templateRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    return template;
+  }
+
+  async getTemplates() {
+    const templates = await this.templateRepository.find();
+    return templates;
+  }
+
+  async deleteTemplate(id: number) {
+    const template = await this.templateRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    fs.rmSync(template.path);
+    await this.templateRepository.remove(template);
+  }
+
+  async renameTemplate(id: number, name: string) {
+    const template = await this.templateRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    template.name = name;
+    await this.templateRepository.save(template);
   }
 }

@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientModule } from './client/client.module';
 import { AdminModule } from './admin/admin.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { JwtModule } from '@nestjs/jwt';
       global: true,
       secret: 'secret',
       signOptions: { expiresIn: '1h' },
-    }), 
+    }),
   ],
   controllers: [],
   providers: [],

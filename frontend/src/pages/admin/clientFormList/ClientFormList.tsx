@@ -33,7 +33,7 @@ const ClientFromList = () => {
         <div className="col-md-12">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title text-uppercase mb-0">Manage Users</h5>
+              <h5 className="card-title text-uppercase mb-0">Clients Forms</h5>
             </div>
             <div className="table-responsive">
               <table className="table no-wrap user-table mb-0">
