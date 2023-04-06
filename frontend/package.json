@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cyntler/react-doc-viewer": "^1.13.0",
     "axios": "^1.3.4",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",

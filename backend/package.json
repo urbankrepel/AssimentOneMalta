@@ -30,13 +30,18 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cookie-parser": "^1.4.6",
+    "docx-pdf": "^0.0.1",
+    "docx-to-html": "^1.0.1",
+    "docx2pdf": "^0.0.4",
     "docxtemplater": "^3.36.1",
     "libreoffice-convert": "^1.4.1",
     "pg": "^8.10.0",
     "pizzip": "^3.1.4",
+    "puppeteer": "^19.8.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "temp": "^0.9.4",
     "typeorm": "^0.3.12"
   },
   "devDependencies": {

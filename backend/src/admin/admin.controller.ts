@@ -104,11 +104,8 @@ export class AdminController {
 
   @UseGuards(AdminGuard)
   @Post('template/:id')
-  async renameTemplate(
-    @Param('id') id: number,
-    @Body('name') name: string,
-  ) {
-    if(!name) throw new BadRequestException('Name is required');
+  async renameTemplate(@Param('id') id: number, @Body('name') name: string) {
+    if (!name) throw new BadRequestException('Name is required');
     await this.adminService.renameTemplate(id, name);
     return {
       message: 'success',

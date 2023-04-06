@@ -9,7 +9,12 @@ const ClientFormList = React.lazy(
   () => import("./pages/admin/clientFormList/ClientFormList")
 );
 const ClientForm = React.lazy(() => import("./pages/clientForm/ClientForm"));
-const TemplateList = React.lazy(() => import("./pages/admin/templateList/TemplateList"));
+const TemplateList = React.lazy(
+  () => import("./pages/admin/templateList/TemplateList")
+);
+const ViewClientsForm = React.lazy(
+  () => import("./pages/admin/viewClientsForm/ViewClientsForm")
+);
 
 function App() {
   return (
@@ -20,6 +25,7 @@ function App() {
           <Route path="/client-form-list" element={<ClientFormList />} />
           <Route path="/client-form" element={<ClientForm />} />
           <Route path="/template-list" element={<TemplateList />} />
+          <Route path="/client-form-view/:id" element={<ViewClientsForm />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

@@ -5,10 +5,10 @@ import { Repository } from 'typeorm';
 import { CreateDto } from './dto/create.dto';
 import { AdminService } from 'src/admin/admin.service';
 import * as fs from 'fs';
-import * as path from 'path';
-import PizZip from 'pizzip';
-import Docxtemplater from 'docxtemplater';
-import libre from 'libreoffice-convert';
+import * as PizZip from 'pizzip';
+const Docxtemplater = require('docxtemplater');
+const docxConverter = require('docx-pdf');
+const temp = require('temp').track();
 
 @Injectable()
 export class ClientService {
@@ -41,6 +41,21 @@ export class ClientService {
     });
   }
 
+  async convertDocxToPdf(docxBuffer: Buffer) {
+    return new Promise((resolve, reject) => {
+      const docxPath = temp.path({ suffix: '.docx' });
+      fs.writeFileSync(docxPath, docxBuffer);
+      const pdfPath = temp.path({ suffix: '.pdf' });
+      docxConverter(docxPath, pdfPath, (err: any, result: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(fs.readFileSync(pdfPath));
+        }
+      });
+    });
+  }
+
   async generateDocx(template_id: number, client_id: number) {
     const template = await this.adminService.getTemplate(template_id);
     const client = await this.getById(client_id);
@@ -62,6 +77,8 @@ export class ClientService {
 
     const docxBuf = doc.getZip().generate({ type: 'nodebuffer' });
 
-    return docxBuf;
+    const pdfBuf = await this.convertDocxToPdf(docxBuf);
+
+    return pdfBuf;
   }
 }

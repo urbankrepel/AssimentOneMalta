@@ -34,15 +34,13 @@ export class ClientController {
     @Body() body: { template_id: number; client_id: number },
     @Res() res: Response,
   ) {
-    const file = await this.clientService.generateDocx(
+    const pdfBuffer = await this.clientService.generateDocx(
       body.template_id,
       body.client_id,
     );
-    res.setHeader(
-      'Content-Type',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    );
-    res.setHeader('Content-Disposition', 'attachment; filename=generated.docx');
-    res.send(file);
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=' + 'test.pdf');
+    res.send(pdfBuffer);
   }
 }
