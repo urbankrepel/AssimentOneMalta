@@ -5,18 +5,19 @@ import TableHeading from "../../../components/clientFormList/TableHeading";
 import { fetchAllClientForms } from "../../../api/admin";
 import useAlert from "../../../hooks/useAlert";
 import { useNavigate } from "react-router-dom";
+import ChooseTemplate from "../../../components/clientFormList/ChooseTemplate";
 
 const ClientFromList = () => {
   const { showError } = useAlert();
   const navigate = useNavigate();
 
   const [data, setData] = React.useState<any>([]);
+  const [selectedForm, setSelectedForm] = React.useState<number | null>(null);
 
   const handleLoad = async () => {
     if (data.length > 0) return;
     const response: any = await fetchAllClientForms();
     if (response.status === 200) {
-      console.log(response.data);
       setData(response.data);
     } else if (response.status === 403) {
       navigate("/login");
@@ -29,6 +30,9 @@ const ClientFromList = () => {
   }, []);
   return (
     <div className="clientPage">
+      {selectedForm != null && (
+        <ChooseTemplate setSelectedForm={setSelectedForm} selectedForm={selectedForm}/>
+      )}
       <div className="row">
         <div className="col-md-12">
           <div className="card">
@@ -43,7 +47,11 @@ const ClientFromList = () => {
                 <tbody>
                   {data && data.length > 0 ? (
                     data.map((item: any) => (
-                      <ClientFormItem key={item.id} {...item} />
+                      <ClientFormItem
+                        key={item.id}
+                        {...item}
+                        setSelectForm={setSelectedForm}
+                      />
                     ))
                   ) : (
                     <tr>

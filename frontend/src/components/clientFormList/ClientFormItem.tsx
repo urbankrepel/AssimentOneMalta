@@ -9,6 +9,7 @@ interface Props {
   address: string;
   city: string;
   country: string;
+  setSelectForm: (id: number) => void;
 }
 
 const ClientFormItem = ({
@@ -20,7 +21,12 @@ const ClientFormItem = ({
   address,
   city,
   country,
+  setSelectForm,
 }: Props) => {
+  const handleSelectForm = () => {
+    setSelectForm(id);
+  };
+
   return (
     <tr>
       <td className="pl-4">{id ?? "1"}</td>
@@ -29,11 +35,6 @@ const ClientFormItem = ({
         <span className="text-muted">
           {city}, {country}
         </span>
-      </td>
-      <td>
-        <span className="text-muted">Visual Designer</span>
-        <br />
-        <span className="text-muted">Past : teacher</span>
       </td>
       <td>
         <span className="text-muted">{email}</span>
@@ -46,15 +47,9 @@ const ClientFormItem = ({
         <span className="text-muted">10: 55 AM</span>
       </td>
       <td>
-        <select
-          className="form-control category-select"
-          id="exampleFormControlSelect1"
-        >
-          <option>Modulator</option>
-          <option>Admin</option>
-          <option>User</option>
-          <option>Subscriber</option>
-        </select>
+        <button className="btn btn-primary" onClick={handleSelectForm}>
+          Choose Template
+        </button>
       </td>
     </tr>
   );

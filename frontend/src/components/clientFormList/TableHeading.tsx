@@ -10,16 +10,10 @@ const TableHeading = () => {
         Name
       </th>
       <th scope="col" className="border-0 text-uppercase font-medium">
-        Occupation
-      </th>
-      <th scope="col" className="border-0 text-uppercase font-medium">
         Email
       </th>
       <th scope="col" className="border-0 text-uppercase font-medium">
-        Added
-      </th>
-      <th scope="col" className="border-0 text-uppercase font-medium">
-        Category
+        Filled Date
       </th>
     </tr>
   );
