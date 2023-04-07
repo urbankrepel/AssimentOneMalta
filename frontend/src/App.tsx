@@ -1,34 +1,24 @@
 import React, { Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = React.lazy(() => import("./pages/login/Login"));
-const ClientFormList = React.lazy(
-  () => import("./pages/admin/clientFormList/ClientFormList")
-);
 const ClientForm = React.lazy(() => import("./pages/clientForm/ClientForm"));
-const TemplateList = React.lazy(
-  () => import("./pages/admin/templateList/TemplateList")
-);
-const ViewClientsForm = React.lazy(
-  () => import("./pages/admin/viewClientsForm/ViewClientsForm")
-);
+const AdminRoute = React.lazy(() => import("./Routes/AdminRoute"));
 
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/client-form-list" element={<ClientFormList />} />
-          <Route path="/client-form" element={<ClientForm />} />
-          <Route path="/template-list" element={<TemplateList />} />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route
-            path="/client-form-view/:template_id/:client_id"
-            element={<ViewClientsForm />}
+            path="/login"
+            element={<Navigate to="/admin/client-form-list" />}
           />
+          <Route path="/client-form" element={<ClientForm />} />
+          <Route path="/admin/*" element={<AdminRoute />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer

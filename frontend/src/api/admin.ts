@@ -59,10 +59,23 @@ const fetchClientForm = async (id: string) => {
     return e.response;
   }
 };
+
+const fetchAdmin = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/admin", {
+      withCredentials: true,
+    });
+    return response;
+  } catch (e: any) {
+    return e.response;
+  }
+};
+
 export {
   fetchAllClientForms,
   fetchAllTemplates,
   fetchUploadTemplate,
   fetchDeleteTemplate,
   fetchClientForm,
+  fetchAdmin,
 };

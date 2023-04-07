@@ -111,4 +111,13 @@ export class AdminController {
       message: 'success',
     };
   }
+
+  @UseGuards(AdminGuard)
+  @Get()
+  @HttpCode(200)
+  async getAdmin() {
+    return {
+      message: 'success',
+    };
+  }
 }
