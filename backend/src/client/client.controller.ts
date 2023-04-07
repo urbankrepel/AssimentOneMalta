@@ -6,6 +6,7 @@ import {
   Get,
   UseGuards,
   Res,
+  Param,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
 import { CreateDto } from './dto/create.dto';
@@ -28,19 +29,27 @@ export class ClientController {
     return await this.clientService.getAll();
   }
 
-  @Post('generate')
+  @Get('generate/template/:template_id/client/:client_id')
   @HttpCode(200)
   async generateDocx(
-    @Body() body: { template_id: number; client_id: number },
+    @Param('template_id') template_id: number,
+    @Param('client_id') client_id: number,
     @Res() res: Response,
   ) {
     const pdfBuffer = await this.clientService.generateDocx(
-      body.template_id,
-      body.client_id,
+      template_id,
+      client_id,
     );
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=' + 'test.pdf');
+    // res.setHeader('Content-Disposition', 'attachment; filename=template.docx');
     res.send(pdfBuffer);
+  }
+
+  @UseGuards(AdminGuard)
+  @Get(':id')
+  @HttpCode(200)
+  async getOne(@Param('id') id: number) {
+    return await this.clientService.getOne(id);
   }
 }

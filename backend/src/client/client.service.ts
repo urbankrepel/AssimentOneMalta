@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientEntity } from './entities/client.entity';
 import { Repository } from 'typeorm';
@@ -60,6 +60,10 @@ export class ClientService {
     const template = await this.adminService.getTemplate(template_id);
     const client = await this.getById(client_id);
 
+    if (!template || !client) {
+      throw new BadRequestException('Template or client not found');
+    }
+
     const contentTemplate = fs.readFileSync(template.path, 'binary');
 
     const zip = new PizZip(contentTemplate);
@@ -80,5 +84,13 @@ export class ClientService {
     const pdfBuf = await this.convertDocxToPdf(docxBuf);
 
     return pdfBuf;
+  }
+
+  async getOne(id: number) {
+    return await this.clientRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 }

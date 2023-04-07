@@ -25,7 +25,10 @@ function App() {
           <Route path="/client-form-list" element={<ClientFormList />} />
           <Route path="/client-form" element={<ClientForm />} />
           <Route path="/template-list" element={<TemplateList />} />
-          <Route path="/client-form-view/:id" element={<ViewClientsForm />} />
+          <Route
+            path="/client-form-view/:template_id/:client_id"
+            element={<ViewClientsForm />}
+          />
         </Routes>
       </BrowserRouter>
       <ToastContainer

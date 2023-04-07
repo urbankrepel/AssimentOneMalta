@@ -49,9 +49,20 @@ const fetchDeleteTemplate = async (id: number) => {
   }
 };
 
+const fetchClientForm = async (id: string) => {
+  try {
+    const response = await axios.get(`http://localhost:3000/client/${id}`, {
+      withCredentials: true,
+    });
+    return response;
+  } catch (e: any) {
+    return e.response;
+  }
+};
 export {
   fetchAllClientForms,
   fetchAllTemplates,
   fetchUploadTemplate,
   fetchDeleteTemplate,
+  fetchClientForm,
 };
