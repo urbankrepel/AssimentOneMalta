@@ -8,9 +8,6 @@ import { useNavigate } from "react-router-dom";
 import ChooseTemplate from "../../../components/clientFormList/ChooseTemplate";
 
 const ClientFromList = () => {
-  const { showError } = useAlert();
-  const navigate = useNavigate();
-
   const [data, setData] = React.useState<any>([]);
   const [selectedForm, setSelectedForm] = React.useState<number | null>(null);
 
@@ -19,9 +16,6 @@ const ClientFromList = () => {
     const response: any = await fetchAllClientForms();
     if (response.status === 200) {
       setData(response.data);
-    } else if (response.status === 403) {
-      navigate("/login");
-      showError("You are not authorized to view this page!");
     }
   };
 
@@ -31,7 +25,10 @@ const ClientFromList = () => {
   return (
     <div className="clientPage">
       {selectedForm != null && (
-        <ChooseTemplate setSelectedForm={setSelectedForm} selectedForm={selectedForm}/>
+        <ChooseTemplate
+          setSelectedForm={setSelectedForm}
+          selectedForm={selectedForm}
+        />
       )}
       <div className="row">
         <div className="col-md-12">

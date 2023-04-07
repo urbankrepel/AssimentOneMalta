@@ -3,6 +3,7 @@ import "./ViewClientsForm.css";
 import { useParams } from "react-router-dom";
 import { fetchClientForm } from "../../../api/admin";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import AdminForms from "../../../components/clientFormView/adminForms/AdminForms";
 
 const ViewClientsForm = () => {
   const { template_id, client_id } = useParams();
@@ -19,7 +20,7 @@ const ViewClientsForm = () => {
     <div className="clientFormViewer">
       <h1>Client Form</h1>
       <div className="clientFormViewer-devider">
-        <div className="clientFormViewer-admin-form">a</div>
+        <AdminForms />
         <DocViewer
           documents={[clientForm]}
           pluginRenderers={DocViewerRenderers}

@@ -37,7 +37,7 @@ const AdminRoute = () => {
         <p>Loading ...</p>
       ) : loggedIn ? (
         <>
-          <AdminNavBar />
+          <AdminNavBar reload={chechLoggedIn} />
           <Routes>
             <Route path="/client-form-list" element={<ClientFormList />} />
             <Route path="/template-list" element={<TemplateList />} />

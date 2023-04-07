@@ -42,7 +42,7 @@ const Login = ({ reload }: Props) => {
                   >
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                     <p className="text-white-50 mb-5">
-                      Please enter your login and password!
+                      Please enter your email and password!
                     </p>
 
                     <div className="form-outline form-white mb-4">

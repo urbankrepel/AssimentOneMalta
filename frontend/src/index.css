@@ -29,6 +29,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 h1 {

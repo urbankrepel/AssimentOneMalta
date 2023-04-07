@@ -9,10 +9,6 @@
   display: flex;
 }
 
-.clientFormViewer-admin-form {
-  flex: 1;
-}
-
 .clientFormViewer-docViewer {
   flex: 1;
   max-height: 100vh;
