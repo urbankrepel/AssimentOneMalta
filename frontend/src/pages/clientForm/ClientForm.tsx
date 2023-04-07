@@ -27,6 +27,7 @@ interface Step {
       | "bank_account_number"
       | "vat_number";
     onChange: (e: any) => void;
+    autoComplete?: string;
   }[];
 }
 
@@ -72,6 +73,7 @@ const ClientForm = () => {
           value: data.firstName,
           required: true,
           fieldName: "firstName",
+          autoComplete: "given-name",
           onChange: handleChange("firstName"),
         },
         {
@@ -80,6 +82,7 @@ const ClientForm = () => {
           value: data.lastName,
           required: true,
           fieldName: "lastName",
+          autoComplete: "family-name",
           onChange: handleChange("lastName"),
         },
         {
@@ -101,6 +104,7 @@ const ClientForm = () => {
           value: data.email,
           required: true,
           fieldName: "email",
+          autoComplete: "email",
           onChange: handleChange("email"),
         },
         {
@@ -109,6 +113,7 @@ const ClientForm = () => {
           value: data.phone,
           required: true,
           fieldName: "phone",
+          autoComplete: "tel",
           onChange: handleChange("phone"),
         },
       ],

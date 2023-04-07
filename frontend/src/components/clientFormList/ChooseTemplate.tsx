@@ -31,7 +31,7 @@ const ChooseTemplate = ({ setSelectedForm, selectedForm }: Props) => {
   };
 
   const handleSubmit = () => {
-    const urlToViewer = `/client-form-view/${selectedTemplate}/${selectedForm}`;
+    const urlToViewer = `/admin/client-form-view/${selectedTemplate}/${selectedForm}`;
     navigate(urlToViewer);
   };
 

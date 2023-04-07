@@ -21,6 +21,7 @@ const FormStep = ({
           placeholder={input.placeholder}
           value={input.value}
           onChange={input.onChange}
+          autoComplete={input.autoComplete}
         />
 
         {errors.map((error) => {

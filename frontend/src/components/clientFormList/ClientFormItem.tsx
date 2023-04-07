@@ -9,6 +9,7 @@ interface Props {
   address: string;
   city: string;
   country: string;
+  created_at: string;
   setSelectForm: (id: number) => void;
 }
 
@@ -21,6 +22,7 @@ const ClientFormItem = ({
   address,
   city,
   country,
+  created_at,
   setSelectForm,
 }: Props) => {
   const handleSelectForm = () => {
@@ -42,9 +44,17 @@ const ClientFormItem = ({
         <span className="text-muted">{phone_number}</span>
       </td>
       <td>
-        <span className="text-muted">15 Mar 1988</span>
+        <span className="text-muted">
+          {new Intl.DateTimeFormat("en-GB", {
+            dateStyle: "full",
+          }).format(new Date(created_at))}
+        </span>
         <br />
-        <span className="text-muted">10: 55 AM</span>
+        <span className="text-muted">
+          {new Intl.DateTimeFormat("en-GB", {
+            timeStyle: "short",
+          }).format(new Date(created_at))}
+        </span>
       </td>
       <td>
         <button className="btn btn-primary" onClick={handleSelectForm}>
