@@ -1,21 +1,39 @@
 import React from "react";
 import useAlert from "../../hooks/useAlert";
-import { fetchDeleteTemplate } from "../../api/admin";
+import { fetchDeleteTemplate, fetchRenameTemplate } from "../../api/admin";
 
 interface Props {
   id: number;
   name: string;
+  reload: () => void;
 }
 
-const TemplateItem = ({ id, name }: Props) => {
+const TemplateItem = ({ id, name, reload }: Props) => {
   const { show } = useAlert();
-  const handleDelete = () => {
+  const handleDelete = async () => {
     const confirm = window.confirm(
       "Are you sure you want to delete this template?"
     );
     if (confirm) {
       const promise = fetchDeleteTemplate(id);
-      show(promise, "Deleting template...", "Template deleted successfully");
+      await show(
+        promise,
+        "Deleting template...",
+        "Template deleted successfully"
+      );
+      await reload();
+    }
+  };
+  const handleRename = async () => {
+    const newName = window.prompt("Enter new name");
+    if (newName) {
+      const promise = fetchRenameTemplate(id, newName);
+      await show(
+        promise,
+        "Renaming template...",
+        "Template renamed successfully"
+      );
+      await reload();
     }
   };
   return (
@@ -25,7 +43,9 @@ const TemplateItem = ({ id, name }: Props) => {
         <p>{name}</p>
       </td>
       <td>
-        <button className="btn btn-primary">Rename</button>
+        <button className="btn btn-primary" onClick={handleRename}>
+          Rename
+        </button>
         <button
           className="btn btn-danger"
           style={{ marginLeft: "10px" }}

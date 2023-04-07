@@ -4,12 +4,15 @@ import { fetchAdmin } from "../api/admin";
 
 const AdminRoute = () => {
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const chechLoggedIn = async () => {
+    setLoading(true);
     const response = await fetchAdmin();
     if (response.status === 200) {
       setLoggedIn(true);
     }
+    setLoading(false);
   };
 
   React.useEffect(() => {
@@ -30,7 +33,9 @@ const AdminRoute = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {loggedIn ? (
+      {loading ? (
+        <p>Loading ...</p>
+      ) : loggedIn ? (
         <>
           <AdminNavBar />
           <Routes>
@@ -43,7 +48,7 @@ const AdminRoute = () => {
           </Routes>
         </>
       ) : (
-        <Login />
+        <Login reload={chechLoggedIn} />
       )}
     </Suspense>
   );

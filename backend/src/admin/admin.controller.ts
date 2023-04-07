@@ -14,6 +14,7 @@ import {
   Get,
   Delete,
   BadRequestException,
+  Put,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Response } from 'express';
@@ -103,7 +104,7 @@ export class AdminController {
   }
 
   @UseGuards(AdminGuard)
-  @Post('template/:id')
+  @Put('template/:id')
   async renameTemplate(@Param('id') id: number, @Body('name') name: string) {
     if (!name) throw new BadRequestException('Name is required');
     await this.adminService.renameTemplate(id, name);

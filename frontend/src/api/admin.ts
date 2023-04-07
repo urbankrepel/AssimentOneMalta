@@ -49,6 +49,23 @@ const fetchDeleteTemplate = async (id: number) => {
   }
 };
 
+const fetchRenameTemplate = async (id: number, name: string) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/admin/template/${id}`,
+      {
+        name,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (e: any) {
+    return e.response;
+  }
+};
+
 const fetchClientForm = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:3000/client/${id}`, {
@@ -78,4 +95,5 @@ export {
   fetchDeleteTemplate,
   fetchClientForm,
   fetchAdmin,
+  fetchRenameTemplate,
 };

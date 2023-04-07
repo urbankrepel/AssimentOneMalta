@@ -68,7 +68,11 @@ const TemplateList = () => {
                 <tbody>
                   {!loading ? (
                     templates.map((item: any) => (
-                      <TemplateItem key={item.id} {...item} />
+                      <TemplateItem
+                        key={item.id}
+                        {...item}
+                        reload={handleLoad}
+                      />
                     ))
                   ) : (
                     <tr>

@@ -5,7 +5,11 @@ import useAlert from "../../hooks/useAlert";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+interface Props {
+  reload: () => void;
+}
+
+const Login = ({ reload }: Props) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { show } = useAlert();
@@ -20,7 +24,7 @@ const Login = () => {
       "Logged in successfully!"
     );
     if (response.status === 200) {
-      navigation("/client-form-list");
+      reload();
     }
   };
 
