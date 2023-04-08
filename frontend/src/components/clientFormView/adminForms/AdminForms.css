@@ -1,3 +1,31 @@
 .clientFormViewer-admin-form {
   flex: 1;
+  padding: 20px;
+}
+
+.clientFormViewer-admin-form-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.clientFormViewer-admin-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientFormViewer-admin-form-input input {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  padding: 10px;
+  color: black;
+}
+
+.clientFormViewer-admin-form-input .error {
+  color: red;
+  font-size: 12px;
+  margin: 0px;
 }

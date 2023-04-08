@@ -20,7 +20,7 @@ const ViewClientsForm = () => {
     <div className="clientFormViewer">
       <h1>Client Form</h1>
       <div className="clientFormViewer-devider">
-        <AdminForms />
+        <AdminForms templateId={template_id} clientId={client_id} />
         <DocViewer
           documents={[clientForm]}
           pluginRenderers={DocViewerRenderers}

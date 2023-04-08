@@ -56,7 +56,7 @@ export class ClientService {
     });
   }
 
-  async generateDocx(template_id: number, client_id: number) {
+  async generateDocx(template_id: number, client_id: number, adminData:any = {}) {
     const template = await this.adminService.getTemplate(template_id);
     const client = await this.getById(client_id);
 
@@ -75,6 +75,7 @@ export class ClientService {
 
     doc.setData({
       ...client,
+      ...adminData,
     });
 
     doc.render();
@@ -83,7 +84,7 @@ export class ClientService {
 
     const pdfBuf = await this.convertDocxToPdf(docxBuf);
 
-    return pdfBuf;
+    return {pdfBuf, templateName: template.name};
   }
 
   async getOne(id: number) {

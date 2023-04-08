@@ -29,6 +29,30 @@ export class ClientController {
     return await this.clientService.getAll();
   }
 
+  @UseGuards(AdminGuard)
+  @Post('generate/admin/template/:template_id/client/:client_id')
+  @HttpCode(200)
+  async generateDocxAdmin(
+    @Param('template_id') template_id: number,
+    @Param('client_id') client_id: number,
+    @Body() adminData: any,
+    @Res() res: Response,
+  ) {
+    const { pdfBuf, templateName } = await this.clientService.generateDocx(
+      template_id,
+      client_id,
+      adminData,
+    );
+
+    res.setHeader('Content-Type', 'application/pdf');
+    const fileName = templateName.split('.')[0];
+    res.setHeader(
+      'Content-Disposition',
+      'attachment; filename=' + fileName + '.pdf',
+    );
+    res.send(pdfBuf);
+  }
+
   @Get('generate/template/:template_id/client/:client_id')
   @HttpCode(200)
   async generateDocx(
@@ -36,14 +60,14 @@ export class ClientController {
     @Param('client_id') client_id: number,
     @Res() res: Response,
   ) {
-    const pdfBuffer = await this.clientService.generateDocx(
+    const { pdfBuf } = await this.clientService.generateDocx(
       template_id,
       client_id,
     );
 
     res.setHeader('Content-Type', 'application/pdf');
     // res.setHeader('Content-Disposition', 'attachment; filename=template.docx');
-    res.send(pdfBuffer);
+    res.send(pdfBuf);
   }
 
   @UseGuards(AdminGuard)

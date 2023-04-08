@@ -9,10 +9,10 @@ const AdminRoute = () => {
   const chechLoggedIn = async () => {
     setLoading(true);
     const response = await fetchAdmin();
+    setLoading(false);
     if (response.status === 200) {
       setLoggedIn(true);
     }
-    setLoading(false);
   };
 
   React.useEffect(() => {
