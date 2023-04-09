@@ -43,7 +43,7 @@ const AddAdminInputs = ({ templateId }: { templateId: number }) => {
   };
 
   useEffect(() => {
-    if (templateId) {
+    if (templateId > 0) {
       handleSubmit();
     }
   }, [templateId]);
