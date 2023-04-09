@@ -89,15 +89,33 @@ const fetchAdmin = async () => {
 };
 
 const fetchAdminLogout = async () => {
-  try{
+  try {
     const response = await axios.get("http://localhost:3000/admin/logout", {
       withCredentials: true,
     });
     return response;
-  }catch(e: any){
+  } catch (e: any) {
     return e.response;
   }
-}
+};
+
+const createAdminInputs = (inputs: any, templateId: number) => {
+  try {
+    const response = axios.post(
+      `http://localhost:3000/admin/input/add`,
+      {
+        inputs,
+        templateId,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (e: any) {
+    return e.response;
+  }
+};
 
 export {
   fetchAllClientForms,
@@ -107,5 +125,6 @@ export {
   fetchClientForm,
   fetchAdmin,
   fetchRenameTemplate,
-  fetchAdminLogout
+  fetchAdminLogout,
+  createAdminInputs,
 };

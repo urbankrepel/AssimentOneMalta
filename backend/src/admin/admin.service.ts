@@ -6,6 +6,8 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { TemplateEntity } from './entities/template.entity';
 import * as fs from 'fs';
+import { AdminInputEntity } from './entities/adminInput.entity';
+import { CreateAdminInputsDto } from './dto/createAdminInputs.dto';
 
 @Injectable()
 export class AdminService {
@@ -15,6 +17,8 @@ export class AdminService {
     private readonly jwtService: JwtService,
     @InjectRepository(TemplateEntity)
     private readonly templateRepository: Repository<TemplateEntity>,
+    @InjectRepository(AdminInputEntity)
+    private readonly adminInputRepository: Repository<AdminInputEntity>,
   ) {}
 
   async login(email: string, password: string) {
@@ -94,5 +98,30 @@ export class AdminService {
     });
     template.name = name;
     await this.templateRepository.save(template);
+  }
+
+  async addInputs(body: CreateAdminInputsDto) {
+    const inputs = body.inputs.map((input) => {
+      return {
+        name: input.name,
+        placeholder: input.placeholder,
+        type: input.type,
+        template: {
+          id: body.templateId,
+        },
+      };
+    });
+    await this.adminInputRepository.save(inputs);
+  }
+
+  async getInputs(templateId: number) {
+    const inputs = await this.adminInputRepository.find({
+      where: {
+        template: {
+          id: templateId,
+        },
+      },
+    });
+    return inputs;
   }
 }

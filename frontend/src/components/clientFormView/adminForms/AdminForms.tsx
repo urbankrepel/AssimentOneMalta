@@ -1,7 +1,7 @@
 import React from "react";
 import "./AdminForms.css";
 import { Step } from "../../../pages/clientForm/ClientForm";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 interface AdminInput {
   type: string;
@@ -94,11 +94,6 @@ const AdminForms = ({ templateId, clientId }: Props) => {
           isValid = false;
           errors.push({ name: input.name, error: "Invalid email address" });
         }
-      } else if (input.type === "number") {
-        if (!dataValue.match(/^[0-9]+$/)) {
-          isValid = false;
-          errors.push({ name: input.name, error: "Invalid number" });
-        }
       }
     });
     setErrors(errors);
@@ -114,8 +109,10 @@ const AdminForms = ({ templateId, clientId }: Props) => {
         responseType: "blob",
         withCredentials: true,
       })
-      .then((res) => {
+      .then((res: AxiosResponse) => {
         const href = window.URL.createObjectURL(res.data);
+
+        console.log(res.headers);
 
         const link = document.createElement("a");
         link.href = href;

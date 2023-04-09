@@ -46,10 +46,7 @@ export class ClientController {
 
     res.setHeader('Content-Type', 'application/pdf');
     const fileName = templateName.split('.')[0];
-    res.setHeader(
-      'Content-Disposition',
-      'attachment; filename=' + fileName + '.pdf',
-    );
+    res.setHeader('filename', fileName);
     res.send(pdfBuf);
   }
 

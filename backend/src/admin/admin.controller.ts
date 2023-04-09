@@ -22,6 +22,7 @@ import { LoginDto } from './dto/login.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { AdminGuard } from './admin.guard';
+import { CreateAdminInputsDto } from './dto/createAdminInputs.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -74,9 +75,10 @@ export class AdminController {
     )
     file: Express.Multer.File,
   ) {
-    await this.adminService.addTemplate(file);
+    const template = await this.adminService.addTemplate(file);
     return {
       message: 'success',
+      templateId: template.id,
     };
   }
 
@@ -120,5 +122,20 @@ export class AdminController {
     return {
       message: 'success',
     };
+  }
+
+  @UseGuards(AdminGuard)
+  @Post('input/add')
+  async addInput(@Body() body: CreateAdminInputsDto) {
+    await this.adminService.addInputs(body);
+    return {
+      message: 'success',
+    };
+  }
+
+  @UseGuards(AdminGuard)
+  @Get('input/:templateId')
+  async getInputs(@Param('templateId') templateId: number) {
+    return await this.adminService.getInputs(templateId);
   }
 }

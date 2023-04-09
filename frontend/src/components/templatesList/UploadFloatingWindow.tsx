@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { fetchUploadTemplate } from "../../api/admin";
+import AddAdminInputs from "./AddAdminInputs";
 
 const UploadFloatingWindow = ({
   setDisplayUpload,
@@ -9,6 +10,7 @@ const UploadFloatingWindow = ({
   handleLoad: any;
 }) => {
   const [file, setFile] = React.useState<File>();
+  const [templateId, setTemplateId] = React.useState<number>(0);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -33,6 +35,8 @@ const UploadFloatingWindow = ({
     fetchUploadTemplate(formData, onUploadProgress).then((response) => {
       setDisplayUpload(false);
       handleLoad();
+      const templateId = response.data.template_id;
+      setTemplateId(templateId);
     });
   };
 
@@ -67,6 +71,7 @@ const UploadFloatingWindow = ({
                 onChange={handleFileChange}
               />
             </div>
+            <AddAdminInputs templateId={templateId} />
           </div>
           <div className="modal-footer">
             <button
