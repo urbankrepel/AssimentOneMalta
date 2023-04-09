@@ -2,6 +2,7 @@ import React from "react";
 import "./AdminForms.css";
 import { Step } from "../../../pages/clientForm/ClientForm";
 import axios, { AxiosResponse } from "axios";
+import { fetchAdminInputs } from "../../../api/admin";
 
 interface AdminInput {
   type: string;
@@ -22,64 +23,37 @@ interface Props {
 }
 
 const AdminForms = ({ templateId, clientId }: Props) => {
-  const [adminData, setAdminData] = React.useState<any>({
-    referenc_number: "",
-    commencement_date: "",
-    service: "",
-    service_fee_vat: "",
-    service_fee: "",
-    payment_terms: "",
-  });
+  const [adminData, setAdminData] = React.useState<any>();
   const [errors, setErrors] = React.useState<AdminInputError[]>([]);
 
   const onChange = (e: any) => {
     setAdminData({ ...adminData, [e.target.name]: e.target.value });
   };
 
-  const inputs: AdminInput[] = [
-    {
-      type: "text",
-      placeholder: "Reference number",
-      value: adminData.referenc_number,
-      name: "referenc_number",
-      onChange: onChange,
-    },
-    {
-      type: "text",
-      placeholder: "Service",
-      value: adminData.service,
-      onChange: onChange,
-      name: "service",
-    },
-    {
-      type: "date",
-      placeholder: "Commencement date",
-      value: adminData.commencement_date,
-      onChange: onChange,
-      name: "commencement_date",
-    },
-    {
-      type: "number",
-      placeholder: "Service fee",
-      value: adminData.service_fee,
-      onChange: onChange,
-      name: "service_fee",
-    },
-    {
-      type: "number",
-      placeholder: "Service fee VAT",
-      value: adminData.service_fee_vat,
-      onChange: onChange,
-      name: "service_fee_vat",
-    },
-    {
-      type: "number",
-      placeholder: "Payment terms",
-      value: adminData.payment_terms,
-      name: "payment_terms",
-      onChange: onChange,
-    },
-  ];
+  const [inputs, setInputs] = React.useState<AdminInput[]>([]);
+
+  const loadAdminInputs = async () => {
+    const response = await fetchAdminInputs(templateId ?? "0");
+    if (response.status !== 200) return;
+    const data = response.data;
+    const adminInputs: AdminInput[] = [];
+    const newAdminData: any = {};
+    data.map((input: any) => {
+      adminInputs.push({
+        type: input.type,
+        placeholder: input.placeholder,
+        value: newAdminData[input.name],
+        onChange: onChange,
+        name: input.name,
+      });
+    });
+    setInputs(adminInputs);
+    setAdminData(newAdminData);
+  };
+
+  React.useEffect(() => {
+    loadAdminInputs();
+  }, []);
 
   const handleValidation = () => {
     let isValid = true;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminInput from "./AdminInput";
 import { createAdminInputs } from "../../api/admin";
 
@@ -39,8 +39,14 @@ const AddAdminInputs = ({ templateId }: { templateId: number }) => {
   };
 
   const handleSubmit = async () => {
-    await createAdminInputs(templateId, inputs)
+    await createAdminInputs(templateId, inputs);
   };
+
+  useEffect(() => {
+    if (templateId) {
+      handleSubmit();
+    }
+  }, [templateId]);
 
   return (
     <div className="form-group" style={{ paddingTop: "10px" }}>

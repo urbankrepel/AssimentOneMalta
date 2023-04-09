@@ -117,6 +117,20 @@ const createAdminInputs = (inputs: any, templateId: number) => {
   }
 };
 
+const fetchAdminInputs = async (templateId: string) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/admin/input/${templateId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (e: any) {
+    return e.response;
+  }
+};
+
 export {
   fetchAllClientForms,
   fetchAllTemplates,
@@ -127,4 +141,5 @@ export {
   fetchRenameTemplate,
   fetchAdminLogout,
   createAdminInputs,
+  fetchAdminInputs,
 };
