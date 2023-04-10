@@ -32,12 +32,12 @@ const UploadFloatingWindow = ({
     const formData = new FormData();
     formData.append("file", file);
 
-    fetchUploadTemplate(formData, onUploadProgress).then((response) => {
-      setDisplayUpload(false);
+    const response = await fetchUploadTemplate(formData, onUploadProgress);
+    if (response.status === 201) {
       handleLoad();
-      const templateId = response.data.template_id;
+      const templateId = response.data.templateId;
       setTemplateId(templateId);
-    });
+    }
   };
 
   const handleClose = () => {
@@ -71,7 +71,10 @@ const UploadFloatingWindow = ({
                 onChange={handleFileChange}
               />
             </div>
-            <AddAdminInputs templateId={templateId} />
+            <AddAdminInputs
+              templateId={templateId}
+              setDisplayUpload={setDisplayUpload}
+            />
           </div>
           <div className="modal-footer">
             <button

@@ -86,7 +86,9 @@ export class AdminService {
         id,
       },
     });
-    fs.rmSync(template.path);
+    try {
+      fs.rmSync(template.path);
+    } catch (e) {}
     await this.templateRepository.remove(template);
   }
 

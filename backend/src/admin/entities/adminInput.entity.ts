@@ -21,7 +21,7 @@ export class AdminInputEntity {
   @Column()
   placeholder: string;
 
-  @ManyToOne(() => TemplateEntity)
+  @ManyToOne(() => TemplateEntity, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'template_id' })
   template: TemplateEntity;
 }

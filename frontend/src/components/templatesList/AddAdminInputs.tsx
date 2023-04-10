@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import AdminInput from "./AdminInput";
 import { createAdminInputs } from "../../api/admin";
 
-const AddAdminInputs = ({ templateId }: { templateId: number }) => {
+const AddAdminInputs = ({
+  templateId,
+  setDisplayUpload,
+}: {
+  templateId: number;
+  setDisplayUpload: any;
+}) => {
   const [inputs, setInputs] = React.useState<any>([]);
 
   const handleChange = (
@@ -39,11 +45,13 @@ const AddAdminInputs = ({ templateId }: { templateId: number }) => {
   };
 
   const handleSubmit = async () => {
-    await createAdminInputs(templateId, inputs);
+    await createAdminInputs(inputs, templateId);
+    setDisplayUpload(false);
   };
 
   useEffect(() => {
-    if (templateId > 0) {
+    console.log("templateId", templateId);
+    if (templateId > 0 && templateId && inputs.length > 0) {
       handleSubmit();
     }
   }, [templateId]);
