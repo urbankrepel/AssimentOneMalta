@@ -8,7 +8,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
-    origin: ['http://localhost:1574', 'https://jakaurban.jure-p.eu'],
+    origin: ['http://localhost:5174', 'https://jakaurban.jure-p.eu'],
     credentials: true,
   });
   await app.listen(3000);

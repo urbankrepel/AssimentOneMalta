@@ -18,13 +18,13 @@ const AllInfromations = ({ data, steps, editStep }: Props) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const promiseCreate = fetchClientForm(data);
-    const response:any = await show(
+    const response: any = await show(
       promiseCreate,
       "Submitting...",
       "Submitted successfully!"
     );
-    if(response.status === 201) {
-      navigation("/client-form-list");
+    if (response.status === 201) {
+      navigation("/admin/client-form-list");
     }
   };
 

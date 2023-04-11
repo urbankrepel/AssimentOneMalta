@@ -28,7 +28,10 @@ const AdminForms = ({ templateId, clientId }: Props) => {
   const [errors, setErrors] = React.useState<AdminInputError[]>([]);
 
   const onChange = (e: any) => {
-    setAdminData({ ...adminData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const newAdminData = adminData;
+    newAdminData[name] = value;
+    setAdminData(newAdminData);
   };
 
   const [inputs, setInputs] = React.useState<AdminInput[]>([]);
@@ -60,6 +63,8 @@ const AdminForms = ({ templateId, clientId }: Props) => {
     let isValid = true;
     const errors: AdminInputError[] = [];
     inputs.forEach((input) => {
+      console.log(input.name);
+      console.log(adminData);
       const dataValue = adminData[input.name] || "";
       if (dataValue === "" || dataValue === "0") {
         isValid = false;
