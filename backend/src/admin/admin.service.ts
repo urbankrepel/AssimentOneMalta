@@ -8,6 +8,7 @@ import { TemplateEntity } from './entities/template.entity';
 import * as fs from 'fs';
 import { AdminInputEntity } from './entities/adminInput.entity';
 import { CreateAdminInputsDto } from './dto/createAdminInputs.dto';
+import { Express } from 'express';
 
 @Injectable()
 export class AdminService {

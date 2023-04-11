@@ -17,7 +17,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { Response } from 'express';
+import { Response, Express } from 'express';
 import { LoginDto } from './dto/login.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -78,7 +78,7 @@ export class AdminController {
         ],
       }),
     )
-    file: any,
+    file: Express.Multer.File,
   ) {
     const template = await this.adminService.addTemplate(file);
     return {
