@@ -3,6 +3,7 @@ import "./AdminForms.css";
 import { Step } from "../../../pages/clientForm/ClientForm";
 import axios, { AxiosResponse } from "axios";
 import { fetchAdminInputs } from "../../../api/admin";
+import APIUrl from "../../../api/api";
 
 interface AdminInput {
   type: string;
@@ -77,7 +78,7 @@ const AdminForms = ({ templateId, clientId }: Props) => {
   const handleSubmission = () => {
     if (!handleValidation()) return;
 
-    const url = `http://localhost:3000/client/generate/admin/template/${templateId}/client/${clientId}`;
+    const url = `${APIUrl}/client/generate/admin/template/${templateId}/client/${clientId}`;
     axios
       .post(url, adminData, {
         responseType: "blob",

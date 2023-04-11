@@ -37,6 +37,11 @@ export class AdminController {
     const token = await this.adminService.login(body.email, body.password);
     res.cookie('token', token, {
       httpOnly: true,
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? 'localhost'
+          : 'jakaurban.jure-p.eu',
+      secure: process.env.NODE_ENV === 'production',
     });
     return {
       message: 'success',

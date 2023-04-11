@@ -1,8 +1,9 @@
 import axios from "axios";
+import APIUrl from "./api";
 
 const fetchAllClientForms = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/client/all", {
+    const response = await axios.get(`${APIUrl}/client/all`, {
       withCredentials: true,
     });
     return response;
@@ -13,12 +14,9 @@ const fetchAllClientForms = async () => {
 
 const fetchAllTemplates = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/admin/template/all",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get(`${APIUrl}/admin/template/all`, {
+      withCredentials: true,
+    });
     return response;
   } catch (e: any) {
     return e.response;
@@ -26,7 +24,7 @@ const fetchAllTemplates = async () => {
 };
 
 const fetchUploadTemplate = (formData: FormData, onUploadProgress: any) => {
-  return axios.post("http://localhost:3000/admin/template/add", formData, {
+  return axios.post(`${APIUrl}/admin/template/add`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -37,12 +35,9 @@ const fetchUploadTemplate = (formData: FormData, onUploadProgress: any) => {
 
 const fetchDeleteTemplate = async (id: number) => {
   try {
-    const response = await axios.delete(
-      `http://localhost:3000/admin/template/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.delete(`${APIUrl}/admin/template/${id}`, {
+      withCredentials: true,
+    });
     return response;
   } catch (e: any) {
     return e.response;
@@ -52,7 +47,7 @@ const fetchDeleteTemplate = async (id: number) => {
 const fetchRenameTemplate = async (id: number, name: string) => {
   try {
     const response = await axios.put(
-      `http://localhost:3000/admin/template/${id}`,
+      `${APIUrl}/admin/template/${id}`,
       {
         name,
       },
@@ -68,7 +63,7 @@ const fetchRenameTemplate = async (id: number, name: string) => {
 
 const fetchClientForm = async (id: string) => {
   try {
-    const response = await axios.get(`http://localhost:3000/client/${id}`, {
+    const response = await axios.get(`${APIUrl}/client/${id}`, {
       withCredentials: true,
     });
     return response;
@@ -79,7 +74,7 @@ const fetchClientForm = async (id: string) => {
 
 const fetchAdmin = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/admin", {
+    const response = await axios.get(`${APIUrl}/admin`, {
       withCredentials: true,
     });
     return response;
@@ -90,7 +85,7 @@ const fetchAdmin = async () => {
 
 const fetchAdminLogout = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/admin/logout", {
+    const response = await axios.get(`${APIUrl}/admin/logout`, {
       withCredentials: true,
     });
     return response;
@@ -102,7 +97,7 @@ const fetchAdminLogout = async () => {
 const createAdminInputs = (inputs: any, templateId: number) => {
   try {
     const response = axios.post(
-      `http://localhost:3000/admin/input/add`,
+      `${APIUrl}/admin/input/add`,
       {
         inputs,
         templateId,
@@ -119,12 +114,9 @@ const createAdminInputs = (inputs: any, templateId: number) => {
 
 const fetchAdminInputs = async (templateId: string) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/admin/input/${templateId}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get(`${APIUrl}/admin/input/${templateId}`, {
+      withCredentials: true,
+    });
     return response;
   } catch (e: any) {
     return e.response;

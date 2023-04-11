@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { fetchClientForm } from "../../../api/admin";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import AdminForms from "../../../components/clientFormView/adminForms/AdminForms";
+import APIUrl from "../../../api/api";
+
 
 const ViewClientsForm = () => {
   const { template_id, client_id } = useParams();
@@ -12,7 +14,7 @@ const ViewClientsForm = () => {
   React.useEffect(() => {
     if (!template_id || !client_id) return;
     setClientForm({
-      uri: `http://localhost:3000/client/generate/template/${template_id}/client/${client_id}`,
+      uri: `${APIUrl}/client/generate/template/${template_id}/client/${client_id}`,
     });
   }, [template_id, client_id]);
 

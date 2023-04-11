@@ -8,6 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "install-nest": "npm i -g @nestjs/cli",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -34,6 +35,7 @@
     "docx-to-html": "^1.0.1",
     "docx2pdf": "^0.0.4",
     "docxtemplater": "^3.36.1",
+    "dotenv": "^16.0.3",
     "libreoffice-convert": "^1.4.1",
     "pg": "^8.10.0",
     "pizzip": "^3.1.4",

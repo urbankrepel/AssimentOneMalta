@@ -1,9 +1,10 @@
 import axios from "axios";
+import APIUrl from "./api";
 
 const fetchLogin = async (email: string, password: string) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/admin/login",
+      `${APIUrl}/admin/login`,
       {
         email,
         password,
