@@ -24,7 +24,7 @@ interface Props {
 }
 
 const AdminForms = ({ templateId, clientId }: Props) => {
-  const [adminData, setAdminData] = React.useState<any>();
+  const [adminData, setAdminData] = React.useState<any>({});
   const [errors, setErrors] = React.useState<AdminInputError[]>([]);
 
   const onChange = (e: any) => {
