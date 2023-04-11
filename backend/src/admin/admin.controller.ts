@@ -23,7 +23,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { AdminGuard } from './admin.guard';
 import { CreateAdminInputsDto } from './dto/createAdminInputs.dto';
-import { Express } from 'express';
 
 @Controller('admin')
 export class AdminController {
@@ -79,7 +78,7 @@ export class AdminController {
         ],
       }),
     )
-    file: Express.Multer.File,
+    file: any,
   ) {
     const template = await this.adminService.addTemplate(file);
     return {
