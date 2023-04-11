@@ -38,7 +38,7 @@ export class AdminController {
     res.cookie('token', token, {
       httpOnly: true,
       domain:
-        process.env.NODE_ENV === 'production'
+        process.env.NODE_ENV !== 'production'
           ? 'localhost'
           : 'jakaurban.jure-p.eu',
       secure: process.env.NODE_ENV === 'production',
